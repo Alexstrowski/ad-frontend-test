@@ -1,8 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import Header from "./Header";
+import { PATHS } from "@/config/paths";
 
 describe("Header", () => {
   it("renders the store name", () => {
@@ -10,23 +9,20 @@ describe("Header", () => {
     expect(screen.getByText("GamerShop")).toBeInTheDocument();
   });
 
-  it("cart button is visible", () => {
+  it("cart link is visible", () => {
     render(<Header />);
-    const cartButton = screen.getByRole("button", {
+    const cartLink = screen.getByRole("link", {
       name: "Abrir carrito de compras",
     });
 
-    expect(cartButton).toBeVisible();
-    expect(cartButton).toBeEnabled();
+    expect(cartLink).toBeVisible();
   });
 
-  it("cart button can be clicked", async () => {
-    const user = userEvent.setup();
+  it("cart link has correct href", async () => {
     render(<Header />);
-    const cartButton = screen.getByRole("button", {
+    const cartLink = screen.getByRole("link", {
       name: "Abrir carrito de compras",
     });
-
-    await user.click(cartButton);
+    expect(cartLink).toHaveAttribute("href", PATHS.CART);
   });
 });
