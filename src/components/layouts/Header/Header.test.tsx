@@ -4,9 +4,12 @@ import Header from "./Header";
 import { PATHS } from "@/config/paths";
 
 describe("Header", () => {
-  it("renders the store name", () => {
+  it("renders the store name logo", () => {
     render(<Header />);
-    expect(screen.getByText("GamerShop")).toBeInTheDocument();
+    const logo = screen.getByRole("img", {
+      name: "gamershop logo",
+    });
+    expect(logo).toBeVisible();
   });
 
   it("cart link is visible", () => {
