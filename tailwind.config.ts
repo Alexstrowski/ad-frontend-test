@@ -21,6 +21,7 @@ const config: Config = {
         stroke: {
           primary: "#3B3B3B",
           secondary: "#8F8F8F",
+          tertiary: "#EFEDF3",
         },
       },
     },

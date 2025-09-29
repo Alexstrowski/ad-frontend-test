@@ -1,17 +1,38 @@
+"use client";
+
 import { GamesListResponse } from "@/types/api";
-import { Card } from "../Card";
+import { useGamesCatalog } from "@/hooks/useGamesCatalog";
+import { GamesSectionHeader } from "../GamesSectionHeader";
+import GamesList from "../GamesList/GamesList";
 
 interface GamesSectionProps {
   initialData: GamesListResponse;
 }
 
 const GamesSection = ({ initialData }: GamesSectionProps) => {
+  const {
+    games,
+    handleLoadMore,
+    isLoading,
+    hasMore,
+    currentGenre,
+    handleFilterChange,
+  } = useGamesCatalog(initialData);
   return (
-    <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-6">
-      {initialData.games.map((game) => (
-        <Card {...game} key={game.id} />
-      ))}
-    </section>
+    <>
+      <GamesSectionHeader
+        genres={initialData.availableFilters || []}
+        currentGenre={currentGenre}
+        onGenreChange={handleFilterChange}
+        isLoading={isLoading}
+      />
+      <GamesList
+        games={games}
+        handleLoadMore={handleLoadMore}
+        hasMore={hasMore}
+        isLoading={isLoading}
+      />
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import GamesSection from "@/features/catalog/components/GamesSection/GamesSection";
+import { GamesSection } from "@/features/catalog/components/GamesSection";
 import { GamesListResponse } from "@/types/api";
 
 export default async function Home({ searchParams }: any) {
@@ -14,8 +14,7 @@ export default async function Home({ searchParams }: any) {
   });
   const initialData: GamesListResponse = await response.json();
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 text-base">
-      <h2>TOP SELLERS</h2>
+    <main className="flex min-h-screen flex-col justify-between text-base">
       <GamesSection initialData={initialData} />
     </main>
   );
