@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import Header from "./Header";
 import { PATHS } from "@/config/paths";
 
-describe("Header", () => {
+describe("Header Component", () => {
   it("renders the store name logo", () => {
     render(<Header />);
     const logo = screen.getByRole("img", {
