@@ -2,7 +2,9 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import GamesSection from "./GamesSection";
 import { GamesListResponse } from "@/types/api";
-import { GAMES_BY_PAGE, TEST_SCENARIOS } from "@/testing/mocks/gamesStore";
+import { TEST_SCENARIOS } from "@/testing/mocks/gamesStore";
+import { server } from "@/testing/mocks/server";
+import { http, HttpResponse } from "msw";
 
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn() }),
@@ -35,7 +37,7 @@ describe("GamesSection Component", () => {
     });
   });
 
-  it("dont have to show SEE MORE button when there are not more games", async () => {
+  it("does not have to show SEE MORE button when there are not more games", async () => {
     const user = userEvent.setup();
     render(<GamesSection initialData={mockInitialData} />);
 
@@ -44,6 +46,24 @@ describe("GamesSection Component", () => {
 
     await waitFor(() => {
       expect(seeMoreButton).not.toBeInTheDocument();
+    });
+  });
+
+  it("shows RPG games when user filters by RPG genre", async () => {
+    const user = userEvent.setup();
+    render(<GamesSection initialData={mockInitialData} />);
+
+    const selectElement = screen.getByRole("combobox");
+    server.use(
+      http.get("/api/games", () => {
+        return HttpResponse.json(TEST_SCENARIOS.RPG_FILTERED);
+      })
+    );
+    await user.click(selectElement);
+    await user.selectOptions(selectElement, "RPG");
+    await waitFor(() => {
+      const updatedGames = screen.getAllByText(/Game \d+/);
+      expect(updatedGames.length).toBe(2);
     });
   });
 });

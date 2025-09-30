@@ -20,18 +20,30 @@ const GamesSectionHeader = ({
   };
 
   return (
-    <section className="flex flex-col py-8 px-6 gap-8 border-b border-stroke-tertiary ">
+    <section
+      className="flex flex-col py-8 px-6 gap-8 border-b border-stroke-tertiary 2xl:py-12 2xl:px-32"
+      aria-labelledby="filter-section"
+    >
       <h2 className="font-bold text-2xl leading-7 text-stroke-primary">
         TOP SELLERS
       </h2>
       <div className="flex gap-6 items-center text-xl md:justify-end xl:justify-end 2xl:justify-end">
-        <span className="font-bold leading-6 text-stroke-primary">Genre</span>
+        <label
+          htmlFor="genre-select"
+          className="font-bold leading-6 text-stroke-primary"
+        >
+          Genre
+        </label>
         <span>|</span>
         <select
+          id="genre-select"
           value={genre}
           onChange={onChangeSelect}
           disabled={isLoading}
-          className="px-4 py-2 border rounded-lg w-full 2xl:w-1/6 bg-white"
+          className={`px-4 py-2 border rounded-lg flex-1 w-full md:max-w-60 bg-white ${
+            isLoading ? "opacity-60" : ""
+          }`}
+          aria-busy={isLoading}
         >
           <option value="">All</option>
           {genres.map((genre) => (
