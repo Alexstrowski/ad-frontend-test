@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
+import { CartProvider } from "@/contexts/CartContext";
 
 const archivo = Archivo({ subsets: ["latin"] });
 
@@ -20,8 +21,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={archivo.className}>
-        <Header />
-        {children}
+        <CartProvider>
+          <Header />
+          {children}
+        </CartProvider>
         <Footer />
       </body>
     </html>

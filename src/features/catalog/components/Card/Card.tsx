@@ -1,10 +1,26 @@
 import { Button } from "@/components/ui/Button";
+import { CartItem } from "@/reducers/cartReducer";
 import { Game } from "@/utils/endpoint";
 import Image from "next/image";
 
-interface CardProps extends Omit<Game, "description"> {}
+interface CardProps extends Game {
+  addItemToCart: (item: CartItem) => void;
+}
 
-const Card = ({ image, genre, name, price, isNew }: CardProps) => {
+const Card = ({
+  image,
+  genre,
+  name,
+  price,
+  isNew,
+  id,
+  description,
+  addItemToCart,
+}: CardProps) => {
+  const onClickAddToCart = () => {
+    addItemToCart({ id, name, price, description });
+  };
+
   return (
     <article className="flex flex-col border-[0.5px] border-stroke-secondary p-6 rounded-2xl gap-5 min-w-[327px]">
       <div className="relative w-full aspect-[93/80]">
@@ -36,7 +52,11 @@ const Card = ({ image, genre, name, price, isNew }: CardProps) => {
           </p>
         </div>
       </div>
-      <Button aria-label={`Add ${name} to cart`} variant="secondary">
+      <Button
+        aria-label={`Add ${name} to cart`}
+        variant="secondary"
+        onClick={onClickAddToCart}
+      >
         ADD TO CART
       </Button>
     </article>
