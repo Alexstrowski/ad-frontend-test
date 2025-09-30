@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { GamesListResponse } from "@/types/api";
 import { Game } from "@/utils/endpoint";
+import { API_ROUTES } from "@/services/routes";
 
 export function useGamesCatalog(initialData: GamesListResponse) {
   const [games, setGames] = useState<Game[]>(initialData.games);
@@ -23,7 +24,7 @@ export function useGamesCatalog(initialData: GamesListResponse) {
         ...(currentGenre && { genre: currentGenre }),
       });
 
-      const res = await fetch(`/api/games?${params}`);
+      const res = await fetch(`${API_ROUTES.GET_GAMES}?${params}`);
       const data: GamesListResponse = await res.json();
 
       setGames((prev) => [...prev, ...data.games]);
@@ -47,7 +48,7 @@ export function useGamesCatalog(initialData: GamesListResponse) {
         ...(genre && { genre }),
       });
 
-      const res = await fetch(`/api/games?${fetchParams}`);
+      const res = await fetch(`${API_ROUTES.GET_GAMES}?${fetchParams}`);
       const data: GamesListResponse = await res.json();
 
       setGames(data.games);

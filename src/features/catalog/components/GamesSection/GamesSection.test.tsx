@@ -6,6 +6,7 @@ import { TEST_SCENARIOS } from "@/testing/mocks/gamesStore";
 import { server } from "@/testing/mocks/server";
 import { http, HttpResponse } from "msw";
 import { CartProvider } from "@/contexts/CartContext";
+import { API_ROUTES } from "@/services/routes";
 
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn() }),
@@ -60,7 +61,7 @@ describe("GamesSection Component", () => {
 
     const selectElement = screen.getByRole("combobox");
     server.use(
-      http.get("/api/games", () => {
+      http.get(API_ROUTES.GET_GAMES, () => {
         return HttpResponse.json(TEST_SCENARIOS.RPG_FILTERED);
       })
     );
