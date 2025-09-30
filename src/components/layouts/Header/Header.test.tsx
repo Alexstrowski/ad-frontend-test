@@ -2,10 +2,17 @@ import { render, screen } from "@testing-library/react";
 
 import Header from "./Header";
 import { PATHS } from "@/config/paths";
+import { CartProvider } from "@/contexts/CartContext";
 
 describe("Header Component", () => {
+  beforeEach(() => {
+    render(
+      <CartProvider>
+        <Header />
+      </CartProvider>
+    );
+  });
   it("renders the store name logo", () => {
-    render(<Header />);
     const logo = screen.getByRole("img", {
       name: "gamershop logo",
     });
@@ -13,7 +20,6 @@ describe("Header Component", () => {
   });
 
   it("cart link is visible", () => {
-    render(<Header />);
     const cartLink = screen.getByRole("link", {
       name: "Abrir carrito de compras",
     });
@@ -22,7 +28,6 @@ describe("Header Component", () => {
   });
 
   it("cart link has correct href", async () => {
-    render(<Header />);
     const cartLink = screen.getByRole("link", {
       name: "Abrir carrito de compras",
     });

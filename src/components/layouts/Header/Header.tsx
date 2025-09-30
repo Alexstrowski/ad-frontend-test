@@ -1,3 +1,4 @@
+import { CartButton } from "@/components/ui/CartButton";
 import { PATHS } from "@/config/paths";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,9 +14,7 @@ const Header = () => {
           width={150}
         />
       </Link>
-      <Link href={PATHS.CART} aria-label="Abrir carrito de compras">
-        <Image src="./cart.svg" alt="shopping-cart" width={24} height={24} />
-      </Link>
+      <CartButton />
     </header>
   );
 };

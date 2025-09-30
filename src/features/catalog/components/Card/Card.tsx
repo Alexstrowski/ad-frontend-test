@@ -5,6 +5,8 @@ import Image from "next/image";
 
 interface CardProps extends Game {
   addItemToCart: (item: CartItem) => void;
+  removeItemFromCart: (id: string) => void;
+  isItemInCart: boolean;
 }
 
 const Card = ({
@@ -15,10 +17,16 @@ const Card = ({
   isNew,
   id,
   description,
+  isItemInCart,
   addItemToCart,
+  removeItemFromCart,
 }: CardProps) => {
-  const onClickAddToCart = () => {
-    addItemToCart({ id, name, price, description });
+  const onClickCardButton = () => {
+    if (isItemInCart) {
+      removeItemFromCart(id);
+    } else {
+      addItemToCart({ id, name, price, description });
+    }
   };
 
   return (
@@ -55,9 +63,9 @@ const Card = ({
       <Button
         aria-label={`Add ${name} to cart`}
         variant="secondary"
-        onClick={onClickAddToCart}
+        onClick={onClickCardButton}
       >
-        ADD TO CART
+        {isItemInCart ? "REMOVE" : "ADD TO CART"}
       </Button>
     </article>
   );

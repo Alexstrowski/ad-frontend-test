@@ -17,14 +17,20 @@ const GamesList = ({
   isLoading,
   handleLoadMore,
 }: GamesListProps) => {
-  const { addItemToCart } = useCart();
+  const { addItemToCart, isItemInCart, removeItemFromCart } = useCart();
   return (
     <section
       className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-6 py-8 px-6 2xl:py-12 2xl:px-32"
       aria-labelledby="game-list-section"
     >
       {games.map((game) => (
-        <Card {...game} key={game.id} addItemToCart={addItemToCart} />
+        <Card
+          {...game}
+          key={game.id}
+          addItemToCart={addItemToCart}
+          removeItemFromCart={removeItemFromCart}
+          isItemInCart={isItemInCart(game.id)}
+        />
       ))}
       {hasMore && (
         <Button onClick={handleLoadMore} disabled={isLoading}>

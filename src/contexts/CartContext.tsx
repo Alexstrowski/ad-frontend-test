@@ -1,6 +1,7 @@
 "use client";
 
 import React, {
+  useState,
   createContext,
   ReactNode,
   useCallback,
@@ -19,6 +20,7 @@ export interface CartContextType {
   hasItems: boolean;
   removeItemFromCart: (id: string) => void;
   total: number;
+  isItemInCart: (id: string) => boolean;
 }
 
 interface CartProviderProps {
@@ -34,16 +36,31 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     "shopping-cart",
     []
   );
+  const [isMounted, setIsMounted] = useState(false);
 
   const initialCartState: CartState = {
-    items: persistedCart,
+    items: [],
   };
 
   const [state, dispatch] = useReducer(cartReducer, initialCartState);
 
   useEffect(() => {
-    setPersistedCart(state.items);
-  }, [state.items, setPersistedCart]);
+    if (!isMounted) {
+      persistedCart.forEach((item) => {
+        dispatch({
+          payload: { item },
+          type: ADD_ITEM,
+        });
+      });
+      setIsMounted(true);
+    }
+  }, [isMounted, persistedCart]);
+
+  useEffect(() => {
+    if (isMounted) {
+      setPersistedCart(state.items);
+    }
+  }, [state.items, setPersistedCart, isMounted]);
 
   const addItemToCart = useCallback((item: CartItem) => {
     dispatch({
@@ -62,12 +79,16 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const value = useMemo(
     () => ({
       addItemToCart,
-      cartItems: state.items,
-      hasItems: state.items.length > 0,
+      cartItems: isMounted ? state.items : [],
+      hasItems: isMounted && state.items.length > 0,
       removeItemFromCart,
-      total: state.items.reduce((acc, item) => acc + item.price, 0),
+      total: isMounted
+        ? state.items.reduce((acc, item) => acc + item.price, 0)
+        : 0,
+      isItemInCart: (id: string) =>
+        isMounted && state.items.some((item) => item.id === id),
     }),
-    [state.items, addItemToCart, removeItemFromCart]
+    [state.items, addItemToCart, removeItemFromCart, isMounted]
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
