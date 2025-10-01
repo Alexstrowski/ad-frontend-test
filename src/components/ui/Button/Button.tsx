@@ -1,3 +1,5 @@
+import { twMerge } from "tailwind-merge";
+
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary";
   children: React.ReactNode;
@@ -9,7 +11,7 @@ const Button = ({
   className,
   ...props
 }: ButtonProps) => {
-  const baseStyles = "font-bold w-full";
+  const baseStyles = "font-bold w-full focus:ring-2";
 
   const variants = {
     primary: "rounded-2xl text-white bg-[#585660] hover:brightness-125 py-5",
@@ -19,7 +21,7 @@ const Button = ({
 
   return (
     <button
-      className={`${baseStyles} ${variants[variant]} ${className || ""}`}
+      className={twMerge(baseStyles, variants[variant], className)}
       {...props}
     >
       {children}

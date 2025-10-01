@@ -61,7 +61,9 @@ const Card = ({
         </div>
       </div>
       <Button
-        aria-label={`Add ${name} to cart`}
+        aria-label={
+          isItemInCart ? `Remove ${name} from cart` : `Add ${name} to cart`
+        }
         variant="secondary"
         onClick={onClickCardButton}
         className={
