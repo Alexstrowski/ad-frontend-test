@@ -26,7 +26,7 @@ export default async function Home({ searchParams }: PageHomeProps) {
   );
   const initialData: GamesListResponse = await response.json();
   return (
-    <main className="flex min-h-screen flex-col justify-between text-base">
+    <main className="flex min-h-screen flex-col text-base">
       <GamesSection initialData={initialData} />
     </main>
   );

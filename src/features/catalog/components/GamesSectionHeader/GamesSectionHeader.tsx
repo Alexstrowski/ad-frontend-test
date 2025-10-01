@@ -21,7 +21,7 @@ const GamesSectionHeader = ({
 
   return (
     <section
-      className="flex flex-col py-8 px-6 gap-8 border-b border-stroke-tertiary 2xl:py-12 2xl:px-32"
+      className="flex flex-col py-8 px-6 gap-8 border-b border-stroke-tertiary lg:py-12 lg:px-32"
       aria-labelledby="filter-section"
     >
       <h2 className="font-bold text-2xl leading-7 text-stroke-primary">

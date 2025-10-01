@@ -50,8 +50,8 @@ const Card = ({
       </div>
       <div className="font-bold">
         <p className="mb-3 leading-4 text-neutral-500">{genre.toUpperCase()}</p>
-        <div className="flex justify-between text-stroke-primary gap-2">
-          <h2 className="text-lg leading-5 tracking-wide">{name}</h2>
+        <div className="flex justify-between items-center text-stroke-primary gap-2 min-h-10 tracking-wide">
+          <h2 className="text-lg leading-5">{name}</h2>
           <p
             aria-label={`Price: ${price} dollars`}
             className="text-xl leading-6"
@@ -64,6 +64,11 @@ const Card = ({
         aria-label={`Add ${name} to cart`}
         variant="secondary"
         onClick={onClickCardButton}
+        className={
+          isItemInCart
+            ? "bg-red-600 text-white border-red-600 hover:bg-red-500 hover:border-red-500"
+            : ""
+        }
       >
         {isItemInCart ? "REMOVE" : "ADD TO CART"}
       </Button>
