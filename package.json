@@ -12,7 +12,9 @@
     "test": "vitest",
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",
-    "test:coverage": "vitest --coverage"
+    "test:coverage": "vitest --coverage",
+    "typecheck": "tsc --noEmit --project tsconfig.typecheck.json",
+    "typecheck:watch": "tsc --noEmit --watch --project tsconfig.typecheck.json"
   },
   "dependencies": {
     "next": "14.2.4",
