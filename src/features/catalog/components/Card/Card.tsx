@@ -25,7 +25,7 @@ const Card = ({
     if (isItemInCart) {
       removeItemFromCart(id);
     } else {
-      addItemToCart({ id, name, price, description });
+      addItemToCart({ id, name, price, description, genre, image });
     }
   };
 

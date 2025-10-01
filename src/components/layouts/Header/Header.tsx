@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const Header = () => {
   return (
-    <header className="flex h-16 py-5 px-6 bg-surface-secondary justify-between 2xl:px-32">
+    <header className="flex h-16 py-5 px-6 bg-surface-secondary justify-between lg:px-32">
       <Link href={PATHS.HOME}>
         <Image
           src="/GamerShop.png"

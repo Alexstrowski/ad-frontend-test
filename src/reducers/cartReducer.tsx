@@ -1,7 +1,7 @@
 import { ADD_ITEM, REMOVE_ITEM } from "@/utils/constants";
 import { Game } from "@/utils/endpoint";
 
-export type CartItem = Pick<Game, "id" | "name" | "price" | "description">;
+export type CartItem = Omit<Game, "isNew">;
 
 export interface CartState {
   items: CartItem[];
