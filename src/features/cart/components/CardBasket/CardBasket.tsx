@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Game } from "@/utils/endpoint";
 
-interface CardBasketProps extends Omit<Game, "isNew"> {
+interface CardBasketProps extends Game {
   removeItemFromCart: (id: string) => void;
 }
 
@@ -12,6 +12,7 @@ const CardBasket = ({
   description,
   genre,
   image,
+  isNew,
   removeItemFromCart,
 }: CardBasketProps) => {
   const handleRemove = () => {
@@ -19,9 +20,17 @@ const CardBasket = ({
   };
 
   return (
-    <div className="flex flex-col py-5 px-4 gap-4 lg:flex-row [&:not(:last-child)]:border-b-[0.5px] [&:not(:last-child)]:border-stroke-secondary">
+    <div className="flex flex-col py-5 px-4 gap-4 lg:gap-6 lg:flex-row [&:not(:last-child)]:border-b-[0.5px] [&:not(:last-child)]:border-stroke-secondary">
       <div className="flex gap-3 items-start lg:contents">
         <div className="relative flex-1 aspect-[16/9] lg:flex-none lg:w-64">
+          {isNew && (
+            <span
+              aria-label="New release"
+              className="absolute top-3 left-3 z-10 bg-stone-100 rounded py-1 px-2 text-stroke-primary leading-4"
+            >
+              New
+            </span>
+          )}
           <Image
             alt={`${name} cover`}
             src={image}
@@ -40,7 +49,7 @@ const CardBasket = ({
             alt="delete-button"
             width={12}
             height={12}
-            className="mx-3 my-3"
+            className="my-3"
           />
         </button>
       </div>

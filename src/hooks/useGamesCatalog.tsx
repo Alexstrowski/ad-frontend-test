@@ -36,6 +36,7 @@ export function useGamesCatalog(initialData: GamesListResponse) {
 
   const handleFilterChange = async (genre: string) => {
     setIsLoading(true);
+    setGames([]);
 
     const params = new URLSearchParams();
 

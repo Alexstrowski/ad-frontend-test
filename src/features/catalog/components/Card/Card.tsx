@@ -25,7 +25,7 @@ const Card = ({
     if (isItemInCart) {
       removeItemFromCart(id);
     } else {
-      addItemToCart({ id, name, price, description, genre, image });
+      addItemToCart({ id, name, price, description, genre, image, isNew });
     }
   };
 
@@ -35,7 +35,7 @@ const Card = ({
         {isNew && (
           <span
             aria-label="New release"
-            className="absolute top-3 left-3 z-10 bg-stone-100 rounded py-2 px-3 text-stroke-primary"
+            className="absolute top-3 left-3 z-10 bg-stone-100 rounded py-2 px-3 text-stroke-primary leading-4"
           >
             New
           </span>
