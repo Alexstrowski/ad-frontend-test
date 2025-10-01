@@ -1,8 +1,9 @@
 import Image from "next/image";
-import { useCart } from "@/hooks/useCart";
 import { Game } from "@/utils/endpoint";
 
-interface CardBasketProps extends Omit<Game, "isNew"> {}
+interface CardBasketProps extends Omit<Game, "isNew"> {
+  removeItemFromCart: (id: string) => void;
+}
 
 const CardBasket = ({
   id,
@@ -11,9 +12,8 @@ const CardBasket = ({
   description,
   genre,
   image,
+  removeItemFromCart,
 }: CardBasketProps) => {
-  const { removeItemFromCart } = useCart();
-
   const handleRemove = () => {
     removeItemFromCart(id);
   };
@@ -32,7 +32,7 @@ const CardBasket = ({
         </div>
         <button
           onClick={handleRemove}
-          aria-label="Remove item from cart"
+          aria-label={`Remove ${name} from cart`}
           className="flex lg:order-3 items-baseline"
         >
           <Image

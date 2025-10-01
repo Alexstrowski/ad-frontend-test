@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, cleanup } from "@testing-library/react";
 import { createGame } from "@/testing/data-generators";
 
 import Card from "./Card";
@@ -11,15 +11,23 @@ const game = createGame({
 });
 
 describe("Card Component", () => {
+  beforeEach(() => {
+    render(
+      <Card
+        {...game}
+        addItemToCart={vi.fn()}
+        isItemInCart={false}
+        removeItemFromCart={vi.fn()}
+      />
+    );
+  });
   it("renders game genre, name and price correctly", () => {
-    render(<Card {...game} />);
     expect(screen.getByText("ACTION")).toBeInTheDocument();
     expect(screen.getByText("Cyberpunk 2077")).toBeInTheDocument();
     expect(screen.getByText(`$${game.price}`)).toBeInTheDocument();
   });
 
   it("displays game cover image", () => {
-    render(<Card {...game} />);
     const gameCover = screen.getByRole("img", {
       name: "Cyberpunk 2077 cover",
     });
@@ -27,17 +35,23 @@ describe("Card Component", () => {
   });
 
   it("displays new badge when the game is new", () => {
-    render(<Card {...game} />);
     expect(screen.getByText("New")).toBeInTheDocument();
   });
 
   it("hides new badge when the game is not new", () => {
-    render(<Card {...{ ...game, isNew: false }} />);
+    cleanup();
+    render(
+      <Card
+        {...{ ...game, isNew: false }}
+        addItemToCart={vi.fn()}
+        isItemInCart={false}
+        removeItemFromCart={vi.fn()}
+      />
+    );
     expect(screen.queryByText("New")).not.toBeInTheDocument();
   });
 
   it("renders accessible add to cart button", () => {
-    render(<Card {...game} />);
     expect(
       screen.getByLabelText(`Add ${game.name} to cart`)
     ).toBeInTheDocument();

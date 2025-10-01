@@ -21,6 +21,7 @@ export interface CartContextType {
   removeItemFromCart: (id: string) => void;
   total: number;
   isItemInCart: (id: string) => boolean;
+  isMounted: boolean;
 }
 
 interface CartProviderProps {
@@ -87,6 +88,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         : 0,
       isItemInCart: (id: string) =>
         isMounted && state.items.some((item) => item.id === id),
+      isMounted: isMounted,
     }),
     [state.items, addItemToCart, removeItemFromCart, isMounted]
   );

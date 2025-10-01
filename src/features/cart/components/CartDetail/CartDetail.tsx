@@ -4,7 +4,15 @@ import { CartSummary } from "../CartSummary";
 import { useCart } from "@/hooks/useCart";
 
 const CartDetail = () => {
-  const { cartItems, total } = useCart();
+  const { cartItems, total, removeItemFromCart, isMounted } = useCart();
+
+  if (!isMounted) {
+    return (
+      <div className="flex justify-center items-center py-8">
+        <div className="text-2xl text-gray-500">Loading...</div>
+      </div>
+    );
+  }
 
   if (cartItems.length === 0) {
     return (
@@ -13,10 +21,14 @@ const CartDetail = () => {
       </p>
     );
   }
+
   return (
     <div className="flex flex-col gap-12 lg:flex-row lg:gap-20">
       <div className="lg:flex-1">
-        <CartProducts cartItems={cartItems} />
+        <CartProducts
+          cartItems={cartItems}
+          removeItemFromCart={removeItemFromCart}
+        />
       </div>
       <div className="flex flex-col gap-12 lg:w-[522px]">
         <CartSummary cartItems={cartItems} total={total} />
