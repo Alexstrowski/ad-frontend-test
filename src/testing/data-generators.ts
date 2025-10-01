@@ -1,6 +1,5 @@
 import {
   randUuid,
-  randImg,
   randProductName,
   randProductDescription,
   randNumber,
@@ -12,7 +11,7 @@ import { Game } from "@/utils/endpoint";
 const generateGame = (): Game => ({
   id: randUuid(),
   genre: rand(["Action", "Adventure", "RPG"]),
-  image: randImg(),
+  image: "/logo.png",
   name: randProductName(),
   description: randProductDescription(),
   price: randNumber({ min: 9.99, max: 99.99, fraction: 2 }),

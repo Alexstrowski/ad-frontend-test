@@ -9,6 +9,7 @@ export default defineConfig({
     setupFiles: "./vitest.setup.ts",
     globals: true,
     css: true,
+    exclude: ["node_modules/**", "e2e/**", ".next/**"],
     coverage: {
       reporter: ["text", "json", "html"],
       exclude: [
@@ -18,6 +19,7 @@ export default defineConfig({
         "*.config.*",
         "**/*.d.ts",
         "**/types/*",
+        "e2e/**",
       ],
     },
   },
