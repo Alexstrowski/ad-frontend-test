@@ -25,6 +25,8 @@ export default defineConfig({
         "**/*.d.ts",
         "**/types/*",
         "e2e/**",
+        "src/utils",
+        "src/app/api",
       ],
     },
   },
