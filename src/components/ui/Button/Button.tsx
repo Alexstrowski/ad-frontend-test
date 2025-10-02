@@ -11,12 +11,13 @@ const Button = ({
   className,
   ...props
 }: ButtonProps) => {
-  const baseStyles = "font-bold w-full focus:ring-2";
+  const baseStyles = "font-bold w-full focus:outline-none focus-visible:ring-2";
 
   const variants = {
-    primary: "rounded-2xl text-white bg-[#585660] hover:brightness-125 py-5",
+    primary:
+      "rounded-2xl text-white bg-[#585660] hover:brightness-125 py-5 focus-visible:ring-[#585660]",
     secondary:
-      "rounded-lg text-stroke-primary border-stroke-primary border-2 px-6 py-4 hover:bg-slate-200",
+      "rounded-lg text-stroke-primary border-stroke-primary border-2 px-6 py-4 hover:bg-slate-200 focus-visible:ring-stroke-primary",
   };
 
   return (
