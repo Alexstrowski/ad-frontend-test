@@ -207,6 +207,10 @@ Coverage report available at `coverage/index.html` after running `npm run test:c
 
 ## 🛡️ Code Quality & Standards
 
+### Error Handling
+
+- **Global Error Boundary**: Implemented with `react-error-boundary` to handle runtime errors
+
 ### Pre-commit Hooks (Husky)
 
 - **Automated quality checks** before every commit
@@ -237,3 +241,4 @@ GitHub Actions workflow with 2 stages:
 - **Accessibility**: Add keyboard navigation for cart operations and genre filtering
 - **Cache Strategy**: Implement SWR or React Query for optimistic updates and caching
 - **Cross-tab Sync**: Implement BroadcastChannel API for real-time cart synchronization
+- **Feature-specific Error Boundaries**: Customize error handling per feature module for more granular error recovery

@@ -27,6 +27,7 @@ export default defineConfig({
         "e2e/**",
         "src/utils",
         "src/app/api",
+        "src/app/providers.tsx",
       ],
     },
   },
