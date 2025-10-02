@@ -183,12 +183,38 @@ Coverage report available at `coverage/index.html` after running `npm run test:c
 - **State Reducer Pattern**: Predictable state updates with clear action-based mutations
 - **Container/Presentational Pattern**: Improves testability and component reusability
 
+### Best Practices
+
+- **Single Responsibility Components**: Components have one clear purpose
+- **Feature-Based Architecture**: Organized by features (`/features/cart`, `/features/catalog`) promoting high cohesion and low coupling
+- **Clean Separation of Concerns**:
+  - Presentation layer: Pure UI components with props-driven design
+  - Business logic: Centralized in custom hooks and reducers
+  - Data access: Abstracted through hooks like `useGamesCatalog`
+- **DRY Principle**: Reusable components (Button, Card), generic hooks (useCart).
+- **SOLID Principles**: Applied in component and hook design
+- **Clean Code Practices**:
+  - Descriptive naming conventions
+  - Small, focused components (20-80 lines average)
+- **Barrel Exports Pattern**: Clean import paths through index files
+
 ## 📌 Technical Decisions
 
 - **Context API over Redux**: Simpler state management for this scale
 - **Vitest over Jest**: Faster test execution and better ESM support
 - **MSW for API Mocking**: Consistent mocking across unit and E2E tests
 - **Playwright over Cypress**: Modern E2E testing with better performance and debugging
+
+## 🛡️ Code Quality & Standards
+
+### Pre-commit Hooks (Husky)
+
+- **Automated quality checks** before every commit
+- **Runs**: `npm run lint && npm run typecheck && npm run format && npm run test`
+
+### Commit Message Standards (Commitlint)
+
+- Enforces conventional commit format
 
 ## 🚀 CI/CD Pipeline
 
