@@ -32,11 +32,14 @@ An e-commerce web application developed as a technical challenge for Apply Digit
 
 ## ⚙️ Pre-requisites
 
-- Node.js v20.9.0 or higher
+- Node.js v22 or higher
 - npm
 - Free port: 3000
+- Docker & Docker Compose (optional)
 
 ## 🚀 Installation
+
+### Option 1: Local Setup
 
 ```bash
 # Clone the repository
@@ -52,7 +55,26 @@ npm install
 npm run dev
 ```
 
-Navigate to [localhost:3000](http://localhost:3000/)
+### Option 2: Docker Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/Alexstrowski/ad-frontend-test.git
+
+# Navigate to project directory
+cd frontend-test-template
+
+# Build and run with Docker Compose
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop the containers
+docker-compose down
+```
+
+Both setups will make the application available at [localhost:3000](http://localhost:3000/)
 
 ## 📜 Available Scripts
 
